@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
@@ -21,11 +22,11 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         List<RegionalStat> allStats= covidDataService.getAllStats();
-        LocalDateTime updateTime = covidDataService.getUpdateTime();
+        ZonedDateTime updateTime = covidDataService.getUpdateTime();
         model.addAttribute("regionalStats", allStats);
         model.addAttribute("totalCases", allStats.stream().mapToInt(RegionalStat::getLatestTotalCases).sum());
         model.addAttribute("totalNewCases", allStats.stream().mapToInt(RegionalStat::getDiffFromPrevDay).sum());
-        DateTimeFormatter updateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter updateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss z");
         String formattedUpdateTime = updateTime.format(updateTimeFormatter);
         model.addAttribute("updateTime", formattedUpdateTime);
         return "home";

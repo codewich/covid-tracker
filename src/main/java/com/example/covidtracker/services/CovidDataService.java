@@ -14,6 +14,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +24,13 @@ public class CovidDataService {
 
     private  static String COVID_DATA_URL="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
     private List<RegionalStat> allStats = new ArrayList<>();
-    private LocalDateTime updateTime = LocalDateTime.now();
+    private ZonedDateTime updateTime = ZonedDateTime.now(ZoneId.of("America/New_York"));
 
     public List<RegionalStat> getAllStats() {
         return allStats;
     }
 
-    public LocalDateTime getUpdateTime() {
+    public ZonedDateTime getUpdateTime() {
         return updateTime;
     }
 
@@ -54,7 +56,7 @@ public class CovidDataService {
             newStats.add(regionalStat);
         }
         this.allStats = newStats;
-        this.updateTime = LocalDateTime.now();
+        this.updateTime = ZonedDateTime.now(ZoneId.of("America/New_York"));;
     }
 
 }
