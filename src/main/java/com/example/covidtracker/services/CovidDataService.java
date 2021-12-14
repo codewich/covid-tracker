@@ -22,6 +22,10 @@ public class CovidDataService {
     private  static String COVID_DATA_URL="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
     private List<RegionalStat> allStats = new ArrayList<>();
 
+    public List<RegionalStat> getAllStats() {
+        return allStats;
+    }
+
     @PostConstruct
     @Scheduled(cron = "0 0 * * * ?")
     public void fetchCovidData() throws IOException, InterruptedException {
