@@ -24,6 +24,7 @@ public class HomeController {
         LocalDateTime updateTime = covidDataService.getUpdateTime();
         model.addAttribute("regionalStats", allStats);
         model.addAttribute("totalCases", allStats.stream().mapToInt(RegionalStat::getLatestTotalCases).sum());
+        model.addAttribute("totalNewCases", allStats.stream().mapToInt(RegionalStat::getDiffFromPrevDay).sum());
         DateTimeFormatter updateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedUpdateTime = updateTime.format(updateTimeFormatter);
         model.addAttribute("updateTime", formattedUpdateTime);

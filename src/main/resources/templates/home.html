@@ -23,7 +23,9 @@
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold" th:text="${totalCases}"></h1>
         <p class="col-md-8 fs-4">cases confirmed as of today</p>
-        <p class="col-md-8 fs-4" th:text="'Updated at: '+${updateTime}"></p>
+        <hr/>
+        <p class="fs-4" th:text="(${totalNewCases}>=0 ? '&uarr; ' : '&darr; ') + ${totalNewCases} +' cases since previous day.'"></p>
+        <p class="col-md-8" th:text="'Updated at: '+${updateTime}"></p>
     </div>
 </div>
 
