@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +22,14 @@ public class CovidDataService {
 
     private  static String COVID_DATA_URL="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
     private List<RegionalStat> allStats = new ArrayList<>();
+    private LocalDateTime updateTime = LocalDateTime.now();
 
     public List<RegionalStat> getAllStats() {
         return allStats;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
     }
 
     @PostConstruct
@@ -41,10 +47,14 @@ public class CovidDataService {
             RegionalStat regionalStat = new RegionalStat();
             regionalStat.setProvinceOrState(record.get("Province/State"));
             regionalStat.setCountryOrRegion(record.get("Country/Region"));
-            regionalStat.setLatestTotalCases(Integer.parseInt(record.get(record.size()-1)));
+            int latestCases = Integer.parseInt(record.get(record.size()-1));
+            int prevCases = Integer.parseInt(record.get(record.size()-2));
+            regionalStat.setLatestTotalCases(latestCases);
+            regionalStat.setDiffFromPrevDay(latestCases-prevCases);
             newStats.add(regionalStat);
         }
         this.allStats = newStats;
+        this.updateTime = LocalDateTime.now();
     }
 
 }
