@@ -17,7 +17,7 @@
 
 <body>
 <div class="container">
-<h1>Covid-19 Case Tracker</h1>
+<h1>Covid-19 Case in the US</h1>
 
 <div class="p-5 mb-4 text-white bg-dark rounded-3">
     <div class="container-fluid py-5">
@@ -39,8 +39,8 @@
     </thead>
     <tbody>
     <tr th:each="regionalStat : ${regionalStats}">
-        <td th:text="${regionalStat.provinceOrState}"></td>
-        <td th:text="${regionalStat.countryOrRegion}"></td>
+        <td th:text="${regionalStat.county}"></td>
+        <td th:text="${regionalStat.state}"></td>
         <td th:text="${regionalStat.latestTotalCases}"></td>
         <td th:text="${regionalStat.diffFromPrevDay}"></td>
     </tr>

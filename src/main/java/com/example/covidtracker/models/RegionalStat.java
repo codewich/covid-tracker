@@ -2,8 +2,8 @@ package com.example.covidtracker.models;
 
 public class RegionalStat {
 
-    private String provinceOrState;
-    private String countryOrRegion;
+    private String county;
+    private String state;
     private int latestTotalCases;
     private int diffFromPrevDay;
 
@@ -15,20 +15,20 @@ public class RegionalStat {
         this.diffFromPrevDay = diffFromPrevDay;
     }
 
-    public String getProvinceOrState() {
-        return provinceOrState;
+    public String getCounty() {
+        return county;
     }
 
-    public void setProvinceOrState(String provinceOrState) {
-        this.provinceOrState = provinceOrState;
+    public void setCounty(String county) {
+        this.county = county;
     }
 
-    public String getCountryOrRegion() {
-        return countryOrRegion;
+    public String getState() {
+        return state;
     }
 
-    public void setCountryOrRegion(String countryOrRegion) {
-        this.countryOrRegion = countryOrRegion;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getLatestTotalCases() {
@@ -42,8 +42,8 @@ public class RegionalStat {
     @Override
     public String toString() {
         return "RegionalStat{" +
-                "provinceOrState='" + provinceOrState + '\'' +
-                ", countryOrRegion='" + countryOrRegion + '\'' +
+                "county='" + county + '\'' +
+                ", state='" + state + '\'' +
                 ", latestTotalCases=" + latestTotalCases +
                 '}';
     }
